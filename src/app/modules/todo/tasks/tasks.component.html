@@ -1,0 +1,79 @@
+<p-button (onClick)="showDialog()" label="Add Task" />
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-5">Update your information.</span>
+    <div class="flex align-items-center gap-3 mb-3">
+        <label class="font-semibold w-6rem">title</label>
+        <input pInputText [(ngModel)]="title" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex align-items-center gap-3 mb-5">
+        <label class="font-semibold w-6rem">description</label>
+        <input pInputText [(ngModel)]="description" class="flex-auto" autocomplete="off" />
+    </div>
+    <div class="flex justify-content-end gap-2">
+        <p-button label="Cancel" severity="secondary" (onClick)="visible = false" />
+        <p-button label="Save" (onClick)="savetask()" />
+    </div>
+</p-dialog>
+
+<p-table [value]="tasks" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>description</th>
+            <th>date</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-task>
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.date }}</td>
+            <!-- Insert -->
+            <p-button (onClick)="showDialog()" icon="pi pi-file-edit" />
+            <p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+                <span class="p-text-secondary block mb-5">Update your information.</span>
+                <div class="flex align-items-center gap-3 mb-3">
+                    <label class="font-semibold w-6rem">title</label>
+                    <input pInputText [(ngModel)]="title" class="flex-auto" autocomplete="off" />
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                    <label class="font-semibold w-6rem">description</label>
+                    <input pInputText [(ngModel)]="description" class="flex-auto" autocomplete="off" />
+                </div>
+                <div class="flex justify-content-end gap-2">
+                    <p-button label="Cancel" severity="secondary" (onClick)="visible = false" />
+                    <p-button label="Save" (onClick)="savetask()" />
+                </div>
+            </p-dialog>
+
+
+            <!-- Delete -->
+            <p-button (onClick)="showDialog2(task.id)" icon="pi pi-trash" />
+            <p-dialog header="Delete Task" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+                <span class="p-text-secondary block mb-5"></span>
+                <div class="flex align-items-center gap-3 mb-3">
+                    <label class="font-semibold w-6rem">Id</label>
+                    <a class="flex-auto" autocomplete="off" > -  {{ task.id }}</a>
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                    <label class="font-semibold w-6rem">Title</label>
+                    <a class="flex-auto" autocomplete="off" > -  {{ task.title }}</a>
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                    <label class="font-semibold w-6rem">Description</label>
+                    <a class="flex-auto" autocomplete="off" > -  {{ task.description }}</a>
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                    <label class="font-semibold w-6rem">Date</label>
+                    <a class="flex-auto" autocomplete="off" > -  {{ task.date }}</a>
+                </div>
+                <div class="flex justify-content-end gap-2">
+                    <p-button label="Cancel" severity="secondary" (onClick)="visible = false" />
+                    <p-button label="Delete" (onClick)="savetask()" />
+                </div>
+            </p-dialog>
+        </tr>
+    </ng-template>
+</p-table>
